@@ -1,0 +1,38 @@
+--- chan_capi-1.1.4.orig/Makefile	2009-07-23 16:11:08.000000000 +0200
++++ chan_capi-1.1.4/Makefile	2009-12-19 19:25:16.668021283 +0100
+@@ -18,15 +18,13 @@
+ 
+ OSNAME=${shell uname}
+ 
+-USE_OWN_LIBCAPI=yes
++USE_OWN_LIBCAPI=no
+ 
+ .EXPORT_ALL_VARIABLES:
+ 
+ V=0
+ 
+-INSTALL_PREFIX=
+-
+-ASTERISK_HEADER_DIR=$(INSTALL_PREFIX)/usr/include
++ASTERISK_HEADER_DIR=$(INSTALL_PREFIX)/include
+ 
+ ifeq (${OSNAME},FreeBSD)
+ ASTERISK_HEADER_DIR=$(INSTALL_PREFIX)/usr/local/include
+@@ -36,7 +34,7 @@
+ ASTERISK_HEADER_DIR=$(INSTALL_PREFIX)/usr/pkg/include
+ endif
+ 
+-MODULES_DIR=$(INSTALL_PREFIX)/usr/lib/asterisk/modules
++MODULES_DIR=$(INSTALL_PREFIX)/lib/asterisk/modules
+ 
+ ifeq (${OSNAME},FreeBSD)
+ MODULES_DIR=$(INSTALL_PREFIX)/usr/local/lib/asterisk/modules
+@@ -92,7 +90,7 @@
+ CFLAGS+=$(shell if uname -m | grep -q ppc; then echo "-fsigned-char"; fi)
+ 
+ LIBS=-ldl -lpthread -lm
+-CC=gcc
++CC=mipsel-linux-gcc
+ INSTALL=install
+ 
+ SHAREDOS=chan_capi.so

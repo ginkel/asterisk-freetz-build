@@ -1,0 +1,11 @@
+--- asterisk-1.6.0.19.orig/main/dns.c	2008-11-29 19:37:55.000000000 +0100
++++ asterisk-1.6.0.19/main/dns.c	2009-12-20 14:32:06.104730863 +0100
+@@ -288,7 +288,7 @@
+ 	res_nclose(&dnsstate);
+ #endif
+ #else
+-#ifndef __APPLE__
++#if !defined(__APPLE__) && !(defined(__UCLIBC__) && !defined(__UCLIBC_HAS_BSD_RES_CLOSE__))
+ 	res_close();
+ #endif
+ 	ast_mutex_unlock(&res_lock);

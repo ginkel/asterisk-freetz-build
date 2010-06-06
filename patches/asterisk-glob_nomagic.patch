@@ -1,0 +1,14 @@
+--- asterisk-1.6.0.19.orig/res/ael/ael_lex.c	2009-06-18 18:58:03.000000000 +0200
++++ asterisk-1.6.0.19/res/ael/ael_lex.c	2009-12-14 23:54:31.140764368 +0100
+@@ -1962,11 +1962,7 @@
+ 		   snprintf(fnamebuf2,sizeof(fnamebuf2), "%s/%s", (char *)ast_config_AST_CONFIG_DIR, fnamebuf);
+ 		   ast_copy_string(fnamebuf,fnamebuf2,sizeof(fnamebuf));
+ 		}
+-#ifdef SOLARIS
+ 			glob_ret = glob(fnamebuf, GLOB_NOCHECK, NULL, &globbuf);
+-#else
+-			glob_ret = glob(fnamebuf, GLOB_NOMAGIC|GLOB_BRACE, NULL, &globbuf);
+-#endif
+ 			if (glob_ret == GLOB_NOSPACE) {
+ 				ast_log(LOG_WARNING,
+ 					"Glob Expansion of pattern '%s' failed: Not enough memory\n", fnamebuf);
