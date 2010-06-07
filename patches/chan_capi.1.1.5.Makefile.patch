@@ -1,6 +1,6 @@
---- chan_capi-1.1.4.orig/Makefile	2009-07-23 16:11:08.000000000 +0200
-+++ chan_capi-1.1.4/Makefile	2009-12-19 19:25:16.668021283 +0100
-@@ -18,15 +18,13 @@
+--- chan_capi-1.1.5/Makefile	2010-04-06 19:33:25.000000000 +0200
++++ chan_capi-1.1.5.uclibc_patch/Makefile	2010-06-05 15:57:54.000000000 +0200
+@@ -18,15 +18,14 @@
  
  OSNAME=${shell uname}
  
@@ -12,13 +12,13 @@
  V=0
  
 -INSTALL_PREFIX=
--
+ 
 -ASTERISK_HEADER_DIR=$(INSTALL_PREFIX)/usr/include
 +ASTERISK_HEADER_DIR=$(INSTALL_PREFIX)/include
  
  ifeq (${OSNAME},FreeBSD)
  ASTERISK_HEADER_DIR=$(INSTALL_PREFIX)/usr/local/include
-@@ -36,7 +34,7 @@
+@@ -36,7 +35,7 @@ ifeq (${OSNAME},NetBSD)
  ASTERISK_HEADER_DIR=$(INSTALL_PREFIX)/usr/pkg/include
  endif
  
@@ -27,8 +27,8 @@
  
  ifeq (${OSNAME},FreeBSD)
  MODULES_DIR=$(INSTALL_PREFIX)/usr/local/lib/asterisk/modules
-@@ -92,7 +90,7 @@
- CFLAGS+=$(shell if uname -m | grep -q ppc; then echo "-fsigned-char"; fi)
+@@ -102,7 +101,7 @@ CFLAGS+=$(shell if $(CC) -march=$(PROC) 
+ CFLAGS+=$(shell if uname -m | grep -q "ppc\|arm\|s390"; then echo "-fsigned-char"; fi)
  
  LIBS=-ldl -lpthread -lm
 -CC=gcc
