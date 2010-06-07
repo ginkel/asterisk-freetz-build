@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Asterisk Build Helper for Freetz/FRITZ!Box
-# Copyright (C) 2009 Thilo-Alexander Ginkel <thilo@ginkel.com>
+# Copyright (C) 2009-2010 Thilo-Alexander Ginkel <thilo@ginkel.com>
 #
 # For instructions, refer to:
 # http://blog.ginkel.com/2009/12/running-asterisk-on-a-fritzbox-7270/
@@ -24,8 +24,8 @@
 # adjust FREETZ_TOOLCHAIN to point to your Freetz toolchain/target directory
 #
 FREETZ_TOOLCHAIN=
-ASTERISK_DOWNLOAD_URL="http://downloads.asterisk.org/pub/telephony/asterisk/old-releases/asterisk-1.6.0.19.tar.gz"
-CHAN_CAPI_DOWNLOAD_URL="ftp://ftp.chan-capi.org/chan-capi/chan_capi-1.1.4.tar.gz"
+ASTERISK_DOWNLOAD_URL="http://downloads.asterisk.org/pub/telephony/asterisk/releases/asterisk-1.6.2.8.tar.gz"
+CHAN_CAPI_DOWNLOAD_URL="ftp://ftp.chan-capi.org/chan-capi/chan_capi-1.1.5.tar.gz"
 
 #
 # DO NOT CHANGE ANY CODE BELOW THIS LINE

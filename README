@@ -1,5 +1,8 @@
 Asterisk Build Helper for Freetz/FRITZ!Box
-Copyright (C) 2009 Thilo-Alexander Ginkel <thilo@ginkel.com>
+Copyright (C) 2009-2010 Thilo-Alexander Ginkel <thilo@ginkel.com>
+
+Contributions by:
+- Thomas Rueter: Update to Asterisk 1.6.2
 
 For instructions, refer to:
 http://blog.ginkel.com/2009/12/running-asterisk-on-a-fritzbox-7270/
