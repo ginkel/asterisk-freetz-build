@@ -1,6 +1,6 @@
---- asterisk-1.6.0.19.orig/contrib/scripts/safe_asterisk	2009-05-26 15:07:29.000000000 +0200
-+++ asterisk-1.6.0.19/contrib/scripts/safe_asterisk	2009-12-20 14:04:36.114689659 +0100
-@@ -1,9 +1,9 @@
+--- asterisk-1.6.2.9.orig/contrib/scripts/safe_asterisk	2010-01-12 04:25:20.000000000 +0100
++++ asterisk-1.6.2.9/contrib/scripts/safe_asterisk	2010-07-05 01:19:08.284866195 +0200
+@@ -1,15 +1,14 @@
 -#!/bin/sh
 +#!/bin/bash
  # vim:textwidth=80:tabstop=4:shiftwidth=4:smartindent:autoindent
@@ -13,7 +13,13 @@
  #NOTIFY=ben@alkaloid.net	# Who to notify about crashes
  #EXEC=/path/to/somescript	# Run this command if Asterisk crashes
  #LOGFILE=/path/to/logfile	# Where to place the normal logfile (disabled if blank)
-@@ -18,9 +18,6 @@
+ #SYSLOG=local0				# Which syslog facility to use (disabled if blank)
+ MACHINE=`hostname`			# To specify which machine has crashed when getting the mail
+-DUMPDROP=/tmp
+ SLEEPSECS=4
+ ASTSBINDIR=__ASTERISK_SBIN_DIR__
+ ASTVARRUNDIR=__ASTERISK_VARRUN_DIR__
+@@ -19,9 +18,6 @@
  # asterisk exits
  KILLALLMPG123=1
  
@@ -23,7 +29,7 @@
  # set system filemax on supported OSes if this variable is set
  # SYSMAXFILES=262144
  
-@@ -98,11 +95,6 @@
+@@ -97,11 +93,6 @@
  fi
  
  #
@@ -35,23 +41,23 @@
  # Don't fork when running "safely"
  #
  ASTARGS=""
-@@ -120,10 +112,6 @@
+@@ -119,10 +110,6 @@
  		ASTARGS="${ASTARGS} -c"
  	fi
  fi
--if [ ! -w ${DUMPDROP} ]; then	
+-if test ! -w "${DUMPDROP}" ; then	
 -	message "Cannot write to ${DUMPDROP}"
 -	exit 1
 -fi
  
  #
  # Don't die if stdout/stderr can't be written to
-@@ -149,10 +137,10 @@
- 		if [ "$TTY" != "" ]; then
+@@ -148,10 +135,10 @@
+ 		if test "x$TTY" != "x" ; then
  			cd /tmp
  			stty sane < /dev/${TTY}
--			nice -n $PRIORITY ${ASTSBINDIR}/asterisk -f ${CLIARGS} ${ASTARGS} >& /dev/${TTY} < /dev/${TTY}
-+			${ASTSBINDIR}/asterisk -f ${CLIARGS} ${ASTARGS} >& /dev/${TTY} < /dev/${TTY}
+-			nice -n $PRIORITY ${ASTSBINDIR}/asterisk -f ${CLIARGS} ${ASTARGS} > /dev/${TTY} 2>&1 < /dev/${TTY}
++			${ASTSBINDIR}/asterisk -f ${CLIARGS} ${ASTARGS} > /dev/${TTY} 2>&1 < /dev/${TTY}
  		else
  			cd /tmp
 -			nice -n $PRIORITY ${ASTSBINDIR}/asterisk -f ${CLIARGS} ${ASTARGS}
@@ -59,25 +65,27 @@
  		fi
  		EXITSTATUS=$?
  		message "Asterisk ended with exit status $EXITSTATUS"
-@@ -171,22 +159,8 @@
- 			if [ "$EXEC" != "" ]; then
+@@ -170,24 +157,8 @@
+ 			if test "x$EXEC" != "x" ; then
  				$EXEC
  			fi
 -
 -			PID=`cat ${ASTPIDFILE}`
--			if [ -f /tmp/core.${PID} ]; then
--				mv /tmp/core.${PID} ${DUMPDROP}/core.`hostname`-`date -Iseconds` &
--			elif [ -f /tmp/core ]; then
--				mv /tmp/core ${DUMPDROP}/core.`hostname`-`date -Iseconds` &
+-			DATE=`date "+%Y-%m-%dT%H:%M:%S%z"`
+-			if test -f /tmp/core.${PID} ; then
+-				mv /tmp/core.${PID} ${DUMPDROP}/core.`hostname`-$DATE &
+-			elif test -f /tmp/core ; then
+-				mv /tmp/core ${DUMPDROP}/core.`hostname`-$DATE &
 -			fi
  		else
  			message "Asterisk died with code $EXITSTATUS."
 -
 -			PID=`cat ${ASTPIDFILE}`
--			if [ -f /tmp/core.${PID} ]; then
--				mv /tmp/core.${PID} ${DUMPDROP}/core.`hostname`-`date -Iseconds` &
--			elif [ -f /tmp/core ]; then
--				mv /tmp/core ${DUMPDROP}/core.`hostname`-`date -Iseconds` &
+-			DATE=`date "+%Y-%m-%dT%H:%M:%S%z"`
+-			if test -f /tmp/core.${PID} ; then
+-				mv /tmp/core.${PID} ${DUMPDROP}/core.`hostname`-$DATE &
+-			elif test -f /tmp/core ; then
+-				mv /tmp/core ${DUMPDROP}/core.`hostname`-$DATE &
 -			fi
  		fi
  		message "Automatically restarting Asterisk."

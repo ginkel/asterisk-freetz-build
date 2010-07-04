@@ -24,7 +24,7 @@
 # adjust FREETZ_TOOLCHAIN to point to your Freetz toolchain/target directory
 #
 FREETZ_TOOLCHAIN=
-ASTERISK_DOWNLOAD_URL="http://downloads.asterisk.org/pub/telephony/asterisk/releases/asterisk-1.6.2.8.tar.gz"
+ASTERISK_DOWNLOAD_URL="http://downloads.asterisk.org/pub/telephony/asterisk/releases/asterisk-1.6.2.9.tar.gz"
 CHAN_CAPI_DOWNLOAD_URL="ftp://ftp.chan-capi.org/chan-capi/chan_capi-1.1.5.tar.gz"
 
 #
@@ -101,7 +101,7 @@ then
 fi
 
 # set up target tar file name
-target_tar="${asterisk_dir}+${chancapi_dir}-freetz.tar.gz"
+target_tar="${asterisk_dir}+${chancapi_dir}-freetz.tar.bz2"
 
 popd
 
@@ -125,7 +125,7 @@ done
 #
 pushd $asterisk_dir
 make distclean
-./configure --build=x86_64-linux-gnu --target=mipsel-linux --host=mipsel-linux --prefix=/var/mod/usr/local/asterisk --without-sdl --without-oss
+./configure --build=x86_64-linux-gnu --target=mipsel-linux --host=mipsel-linux --prefix=/var/mod/usr/local/asterisk --without-sdl --without-oss --disable-xmldoc
 rm -rf "$my_dir/dist"
 make install DESTDIR="$my_dir/dist"
 popd
@@ -158,6 +158,6 @@ fi
 
 cp "$my_dir/scripts/start-asterisk.sh" "$my_dir/dist/var/mod/usr/local/asterisk/bin/"
 
-fakeroot tar czf "$my_dir/$target_tar" -C "$my_dir/dist/var/mod/usr/local" asterisk/
+fakeroot tar cjf "$my_dir/$target_tar" -C "$my_dir/dist/var/mod/usr/local" asterisk/
 
 echo "Building Asterisk + chan_capi finished. Build result is located in $target_tar"

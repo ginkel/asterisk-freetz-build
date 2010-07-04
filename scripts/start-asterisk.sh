@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # Asterisk Startup Helper for Freetz/FRITZ!Box
-# Copyright (C) 2009 Thilo-Alexander Ginkel <thilo@ginkel.com>
+# Copyright (C) 2009-2010 Thilo-Alexander Ginkel <thilo@ginkel.com>
 #
 # For instructions, refer to:
 # http://blog.ginkel.com/2009/12/running-asterisk-on-a-fritzbox-7270/

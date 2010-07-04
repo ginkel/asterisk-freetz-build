@@ -1,5 +1,5 @@
---- asterisk-1.6.2.8/include/asterisk/config.h	2009-03-09 21:58:17.000000000 +0100
-+++ asterisk-1.6.2.8.uclibc_patch/include/asterisk/config.h	2010-06-05 08:39:57.000000000 +0200
+--- asterisk-1.6.2.9/include/asterisk/config.h	2009-03-09 21:58:17.000000000 +0100
++++ asterisk-1.6.2.9.uclibc_patch/include/asterisk/config.h	2010-06-05 08:39:57.000000000 +0200
 @@ -19,6 +19,8 @@
  /*! \file
   * \brief Configuration File Parser
