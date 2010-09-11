@@ -1,5 +1,5 @@
---- asterisk-1.6.2.9.orig/contrib/scripts/safe_asterisk	2010-01-12 04:25:20.000000000 +0100
-+++ asterisk-1.6.2.9/contrib/scripts/safe_asterisk	2010-07-05 01:19:08.284866195 +0200
+--- asterisk-1.6.2.11.orig/contrib/scripts/safe_asterisk	2010-01-12 04:25:20.000000000 +0100
++++ asterisk-1.6.2.11/contrib/scripts/safe_asterisk	2010-07-05 01:19:08.284866195 +0200
 @@ -1,15 +1,14 @@
 -#!/bin/sh
 +#!/bin/bash

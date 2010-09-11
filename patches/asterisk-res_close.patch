@@ -1,5 +1,5 @@
---- asterisk-1.6.2.9/main/dns.c	2008-11-29 18:57:39.000000000 +0100
-+++ asterisk-1.6.2.9.uclibc_patch/main/dns.c	2010-06-05 09:12:24.000000000 +0200
+--- asterisk-1.6.2.11/main/dns.c	2008-11-29 18:57:39.000000000 +0100
++++ asterisk-1.6.2.11.uclibc_patch/main/dns.c	2010-06-05 09:12:24.000000000 +0200
 @@ -288,7 +288,7 @@ int ast_search_dns(void *context,
  	res_nclose(&dnsstate);
  #endif

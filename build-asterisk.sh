@@ -24,7 +24,7 @@
 # adjust FREETZ_TOOLCHAIN to point to your Freetz toolchain/target directory
 #
 FREETZ_TOOLCHAIN=
-ASTERISK_DOWNLOAD_URL="http://downloads.asterisk.org/pub/telephony/asterisk/releases/asterisk-1.6.2.9.tar.gz"
+ASTERISK_DOWNLOAD_URL="http://downloads.asterisk.org/pub/telephony/asterisk/releases/asterisk-1.6.2.11.tar.gz"
 CHAN_CAPI_DOWNLOAD_URL="ftp://ftp.chan-capi.org/chan-capi/chan_capi-1.1.5.tar.gz"
 
 #
@@ -156,6 +156,7 @@ then
 	rm "$my_dir/$target_tar"
 fi
 
+mkdir "$my_dir/dist/var/mod/usr/local/asterisk/bin/"
 cp "$my_dir/scripts/start-asterisk.sh" "$my_dir/dist/var/mod/usr/local/asterisk/bin/"
 
 fakeroot tar cjf "$my_dir/$target_tar" -C "$my_dir/dist/var/mod/usr/local" asterisk/
