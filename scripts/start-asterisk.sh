@@ -20,6 +20,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 debug=
+LIBNCURSES_DIR=/usr/lib/freetz
 
 while [ $# -gt 0 ]
 do
@@ -49,6 +50,12 @@ then
 
         mount --bind $my_dir/../ /var/mod/usr/local/asterisk
         ln -s /var/mod/usr/local/asterisk/sbin/asterisk /var/mod/sbin/
+fi
+
+# freetz-trunk puts ncurses into a directory, which is not in the LD_LIBRARY_PATH by default
+echo "$LD_LIBRARY_PATH" | grep -q "$LIBNCURSES_DIR" 
+if [[ $? -ne 0 ]] && [ -e "$LIBNCURSES_DIR/libncurses.so.5" ] ; then
+   export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$LIBNCURSES_DIR
 fi
 
 if [ "$debug" = "yes" ]
