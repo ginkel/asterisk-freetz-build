@@ -23,9 +23,10 @@
 # configuration
 # adjust FREETZ_TOOLCHAIN to point to your Freetz toolchain/target directory
 #
-FREETZ_TOOLCHAIN=
+FREETZ_TOOLCHAIN="/home/tg/src/freetz-trunk/toolchain/target/"
 ASTERISK_DOWNLOAD_URL="http://downloads.asterisk.org/pub/telephony/asterisk/releases/asterisk-1.6.2.11.tar.gz"
 CHAN_CAPI_DOWNLOAD_URL="ftp://ftp.chan-capi.org/chan-capi/chan_capi-1.1.5.tar.gz"
+CHAN_SCCP_DOWNLOAD_URL="http://freefr.dl.sourceforge.net/project/chan-sccp-b/V2/Chan_SCCP-2.0_Final.tar.gz"
 
 #
 # DO NOT CHANGE ANY CODE BELOW THIS LINE
@@ -100,6 +101,14 @@ then
         wget ${CHAN_CAPI_DOWNLOAD_URL}
 fi
 
+# download chan_capi
+chansccp_tar=`basename ${CHAN_SCCP_DOWNLOAD_URL}`
+chansccp_dir="chan_sccp-b_20090602"
+if [ ! -e $chansccp_tar ]
+then
+        wget ${CHAN_SCCP_DOWNLOAD_URL}
+fi
+
 # set up target tar file name
 target_tar="${asterisk_dir}+${chancapi_dir}-freetz.tar.bz2"
 
@@ -111,6 +120,7 @@ popd
 pushd "$my_dir/build"
 tar xzf "$my_dir/archives/$asterisk_tar"
 tar xzf "$my_dir/archives/$chancapi_tar"
+tar xzf "$my_dir/archives/$chansccp_tar"
 
 #
 # apply patches
@@ -134,6 +144,13 @@ popd
 # build chan_capi
 #
 pushd $chancapi_dir
+make install INSTALL_PREFIX="$my_dir/dist/var/mod/usr/local/asterisk/"
+popd
+
+#
+# build chan_sccp
+#
+pushd $chansccp_dir
 make install INSTALL_PREFIX="$my_dir/dist/var/mod/usr/local/asterisk/"
 popd
 
