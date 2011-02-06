@@ -125,7 +125,7 @@ done
 #
 pushd $asterisk_dir
 make distclean
-./configure --build=x86_64-linux-gnu --target=mipsel-linux --host=mipsel-linux --prefix=/var/mod/usr/local/asterisk --without-sdl --without-oss --disable-xmldoc
+CFLAGS=-fno-builtin-ffs ./configure --build=x86_64-linux-gnu --target=mipsel-linux --host=mipsel-linux --prefix=/var/mod/usr/local/asterisk --without-sdl --without-oss --disable-xmldoc
 rm -rf "$my_dir/dist"
 make install DESTDIR="$my_dir/dist"
 popd
